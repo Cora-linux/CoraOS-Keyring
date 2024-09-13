@@ -8,6 +8,14 @@ populate_archlinux() {
 
 
 post_upgrade() {
+	# Older versions of pacman (before 6.1.0) disabled locking by default:
+	# https://gitlab.archlinux.org/pacman/pacman/-/commit/1d1bb6fa1a8247242fbdd226f50265a278a12ac8
+	#
+	# This still causes lots of problems, so force to remove that option.
+	if grep -qx 'lock-never' etc/pacman.d/gnupg/gpg.conf 2>/dev/null; then
+		sed -i '/^lock-never$/d' etc/pacman.d/gnupg/gpg.conf
+	fi
+
 	populate_archlinux
 }
 
