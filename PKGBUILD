@@ -6,7 +6,7 @@ pkgbase=archlinux-keyring
 pkgname=(archlinux-keyring
          voa-verifiers-arch)
 pkgver=20260107
-pkgrel=1
+pkgrel=2
 pkgdesc='Arch Linux PGP keyring'
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/archlinux-keyring/'
