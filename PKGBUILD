@@ -1,5 +1,6 @@
-# Maintainer: Pierre Schmitz <pierre@archlinux.de>
-# Maintainer: Bartłomiej Piotrowski <bpiotrowski@archlinux.org>
+# Maintainer: Christian Hesse <eworm@archlinux.org>
+# Contributor: Pierre Schmitz <pierre@archlinux.de>
+# Contributor: Bartłomiej Piotrowski <bpiotrowski@archlinux.org>
 
 pkgbase=archlinux-keyring
 pkgname=(archlinux-keyring
