@@ -1,0 +1,10 @@
+#!/bin/bash
+
+post_install() {
+    pacman-key --add /usr/share/pacman/keyrings/coraos.gpg
+    pacman-key --lsign-key 361EC3F1B76210CE2ABB7BE002552EA95DC06E87
+}
+
+post_upgrade() {
+    post_install
+}

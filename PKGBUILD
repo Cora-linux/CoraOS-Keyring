@@ -1,36 +1,22 @@
-# Maintainer: FusionTech <support@coraos.org>
-
-pkgbase=coraos-keyring
-pkgname=(coraos-keyring)
-pkgver=20260726
+pkgname=coraos-keyring
+pkgver=1
 pkgrel=1
-pkgdesc='CoraOS PGP keyring'
+pkgdesc="CoraOS PGP keyring"
 arch=('any')
-url='https://github.com/Cora-linux/CoraOS-Keyring'
-license=('GPL-3.0')
-makedepends=('git' 'python' 'sequoia-sq' 'pkgconf' 'systemd')
-checkdepends=('python-coverage' 'python-pytest')
+license=('GPL')
+depends=('pacman')
+install=$pkgname.install
 
-source=("CoraOS-Keyring::git+https://github.com/Cora-linux/CoraOS-Keyring.git#tag=${pkgver}")
-b2sums=('SKIP')
-sha256sums=('SKIP')
+source=('coraos.gpg'
+        'coraos-revoked')
 
-validpgpkeys=('361EC3F1B76210CE2ABB7BE002552EA95DC06E87')
+b2sums=('c2e0dfb5210bb66569c1d1c5e6f3c9a9b029144be8750147cbf252d68bd4033f1c6a9414deaca4e93e690e578ca7c8b5b1d9cfc0e42044eb082de3a63e30ad26'
+        '786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419d25e1031afee585313896444934eb04b903a685b1448b755d56f701afe9be2ce')
 
-build() {
-  cd CoraOS-Keyring/
-  make build
-}
+package() {
+    install -Dm644 "$srcdir/coraos.gpg" \
+        "$pkgdir/usr/share/pacman/keyrings/coraos.gpg"
 
-check() {
-  cd CoraOS-Keyring/
-  make check
-}
-
-package_coraos-keyring() {
-  install=coraos.install
-  depends=('pacman')
-
-  cd CoraOS-Keyring/
-  make PREFIX='/usr' DESTDIR="${pkgdir}" install
+    install -Dm644 "$srcdir/coraos-revoked" \
+        "$pkgdir/usr/share/pacman/keyrings/coraos-revoked"
 }
