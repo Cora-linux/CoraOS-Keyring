@@ -1,52 +1,36 @@
-# Maintainer: Christian Hesse <eworm@archlinux.org>
-# Contributor: Pierre Schmitz <pierre@archlinux.de>
-# Contributor: Bartłomiej Piotrowski <bpiotrowski@archlinux.org>
+# Maintainer: FusionTech <support@coraos.org>
 
-pkgbase=archlinux-keyring
-pkgname=(archlinux-keyring
-         voa-verifiers-arch)
-pkgver=20260612
+pkgbase=coraos-keyring
+pkgname=(coraos-keyring)
+pkgver=20260726
 pkgrel=1
-pkgdesc='Arch Linux PGP keyring'
+pkgdesc='CoraOS PGP keyring'
 arch=('any')
-url='https://gitlab.archlinux.org/archlinux/archlinux-keyring/'
-license=('GPL-3.0-or-later')
-makedepends=('git' 'python' 'sequoia-sq' 'pkgconf' 'systemd' 'voa')
+url='https://github.com/Cora-linux/CoraOS-Keyring'
+license=('GPL-3.0')
+makedepends=('git' 'python' 'sequoia-sq' 'pkgconf' 'systemd')
 checkdepends=('python-coverage' 'python-pytest')
-source=("archlinux-keyring::git+https://gitlab.archlinux.org/archlinux/archlinux-keyring.git?signed#tag=${pkgver}")
-sha256sums=('89ea9040438c1d60b647ade49e2667434cdf44d6800072c119df7dc8ae7bb217')
-validpgpkeys=('02FD1C7A934E614545849F19A6234074498E9CEE'  # Christian Hesse <eworm@archlinux.org>
-              '991F6E3F0765CF6295888586139B09DA5BF0D338'  # David Runge <dvzrv@archlinux.org>
-              '5134EF9EAF65F95B6BB1608E50FB9B273A9D0BB5'  # Johannes Löthberg <demize@archlinux.org>
-              'B4B759625D4633430B74877059E43E106B247368'  # Leonidas Spyropoulos <artafinde@archlinux.org>
-              'E240B57E2C4630BA768E2F26FC1B547C8D8172C8'  # Levente Polyak <anthraxx@archlinux.org>
-              'C100346676634E80C940FB9E9C02FF419FECBE16') # Morten Linderud <foxboron@archlinux.org>
+
+source=("CoraOS-Keyring::git+https://github.com/Cora-linux/CoraOS-Keyring.git#tag=${pkgver}")
+b2sums=('SKIP')
+sha256sums=('SKIP')
+
+validpgpkeys=('361EC3F1B76210CE2ABB7BE002552EA95DC06E87')
 
 build() {
-  cd archlinux-keyring/
-
-  make build build-voa
+  cd CoraOS-Keyring/
+  make build
 }
 
 check() {
-  cd archlinux-keyring/
-
+  cd CoraOS-Keyring/
   make check
 }
 
-package_archlinux-keyring() {
-  install=$pkgname.install
+package_coraos-keyring() {
+  install=coraos.install
   depends=('pacman')
 
-  cd archlinux-keyring/
-
+  cd CoraOS-Keyring/
   make PREFIX='/usr' DESTDIR="${pkgdir}" install
-}
-
-package_voa-verifiers-arch() {
-  pkgdesc='Arch Linux verifiers for the Hierarchy for the Verification of OS Artifacts (VOA)'
-
-  cd archlinux-keyring/
-
-  make PREFIX='/usr' DESTDIR="${pkgdir}" install-voa
 }
