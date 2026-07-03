@@ -1,6 +1,6 @@
 pkgname=coraos-keyring
 pkgver=1
-pkgrel=1
+pkgrel=2
 pkgdesc="CoraOS PGP keyring"
 arch=('any')
 license=('GPL')
